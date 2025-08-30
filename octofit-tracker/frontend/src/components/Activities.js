@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
+  // Endpoint: -8000.app.github.dev/api/activities
   const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/activities/`;
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Teams = () => {
   const [teams, setTeams] = useState([]);
+  // Endpoint: -8000.app.github.dev/api/teams
   const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/teams/`;
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
+  // Endpoint: -8000.app.github.dev/api/leaderboard
   const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/leaderboard/`;
 
   useEffect(() => {

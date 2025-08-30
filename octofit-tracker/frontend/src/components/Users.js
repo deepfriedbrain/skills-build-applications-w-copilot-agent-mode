@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  // Endpoint: -8000.app.github.dev/api/users
   const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/users/`;
 
   useEffect(() => {
