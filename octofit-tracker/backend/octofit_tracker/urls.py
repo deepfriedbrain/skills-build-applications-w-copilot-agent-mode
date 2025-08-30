@@ -15,12 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('octofit_tracker.api')),
-]
-
 from rest_framework import routers
 from .views import UserViewSet, TeamViewSet, ActivityViewSet, LeaderboardViewSet, WorkoutViewSet
 from rest_framework.response import Response
@@ -35,16 +29,21 @@ router.register(r'workouts', WorkoutViewSet)
 
 @api_view(['GET'])
 def api_root(request):
+    import os
+    codespace = os.environ.get('CODESPACE_NAME', '')
+    base_url = request.build_absolute_uri('/')
+    if codespace:
+        base_url = f'https://{codespace}-8000.app.github.dev/'
     return Response({
-        'users': '/users/',
-        'teams': '/teams/',
-        'activities': '/activities/',
-        'leaderboard': '/leaderboard/',
-        'workouts': '/workouts/',
+        'users': f'{base_url}api/users/',
+        'teams': f'{base_url}api/teams/',
+        'activities': f'{base_url}api/activities/',
+        'leaderboard': f'{base_url}api/leaderboard/',
+        'workouts': f'{base_url}api/workouts/',
     })
 
-urlpatterns += [
+urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', api_root, name='api_root'),
     path('', include(router.urls)),
-]
 ]
