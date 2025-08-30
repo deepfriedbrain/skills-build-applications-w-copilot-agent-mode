@@ -30,7 +30,12 @@ const Teams = () => {
             {teams.map((team, idx) => (
               <tr key={idx}>
                 <td>{team.name}</td>
-                <td>{team.members && team.members.join(', ')}</td>
+                <td>{Array.isArray(team.members)
+                  ? team.members.join(', ')
+                  : typeof team.members === 'string'
+                    ? team.members.replace(/\[|\]|'/g, '').split(',').map(m => m.trim()).join(', ')
+                    : ''}
+                </td>
               </tr>
             ))}
           </tbody>
